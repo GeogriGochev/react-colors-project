@@ -13,7 +13,61 @@
     flex: 0 1 20%;
     max-width: 20%;
     height: 25%;
-    display: flex;
-    justify-content: center;
-    align-items: center;
+    position: relative;
+    cursor: pointer;
+    text-transform: uppercase;
+
+    .copy-button {
+        width: 100px;
+        height: 30px;
+        position: absolute;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        top: 0;
+        left: 0;
+        right: 0;
+        bottom: 0;
+        margin: auto;
+        outline: none;
+        background: rgba( 255, 255, 255, 0.3 );
+        font-size: 1rem;
+        line-height: 1.875rem;
+        color: white;
+        border: none;
+        opacity: 0;
+        transition: 0.35s ease-in-out;
+    }
+
+    .copy-container {
+        width: 100%;
+        display: flex;
+        justify-content: flex-start;
+        align-items: flex-end;
+    }
+
+    .box-content { 
+        display: flex;
+        align-items: center;
+        justify-content: space-between;     
+        width: 100%; 
+        color: black;
+        letter-spacing: 1px;
+        font-size: 0.75rem;
+        .name {
+            padding: 7px;
+        }
+        .see-more {
+            padding: 10px; 
+            background: rgba( 255, 255, 255, 0.3 );
+            color: white;
+            padding: 7px;
+        }
+
+    }
+    &:hover {
+        .copy-button {
+            opacity: 1;
+        }
+    }
 }
