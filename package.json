@@ -30,5 +30,11 @@
       "last 1 firefox version",
       "last 1 safari version"
     ]
+  },
+  "devDependencies": {
+    "gh-pages": "^2.2.0",
+    "node-sass": "^4.13.1",
+    "react-router-dom": "^5.1.2",
+    "styled-components": "^5.1.0"
   }
 }
