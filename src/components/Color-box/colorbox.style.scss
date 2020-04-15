@@ -54,8 +54,7 @@ body {
 }
 
 .Palette {
-    height: 100vh;
-    overflow: hidden;
+  height: calc(100vh - 150px);
 }
 
 .Palette-colors {
@@ -63,7 +62,7 @@ body {
     justify-content: flex-start;
     align-items: center;
     flex-wrap: wrap;
-    height: 90%;
+    height: 100%;
 }
 
 .ColorBox {
@@ -143,7 +142,7 @@ body {
 
     .copy-button {
         width: 100px;
-        height: 30px;
+        height: 40px;
         position: absolute;
         cursor: pointer;
         display: flex;
@@ -155,11 +154,16 @@ body {
         bottom: 0;
         margin: auto;
         outline: none;
-        background: rgba( 255, 255, 255, 0.3 );
-        font-size: 1rem;
-        line-height: 1.875rem;
+        background: transparent;;
+        font-size: 20px;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        border: 1px solid rgba( 255, 255, 255, 0.3 );
+        text-transform: uppercase;
+        padding: 5px 0;
+        border-radius: 5px;
         color: white;
-        border: none;
         opacity: 0;
         transition: 0.25s ease-in-out;
     }
@@ -230,7 +234,7 @@ body {
 
 
 header {
-    height: 80px;
+    height: 75px;
     padding: 0 30px;
     .logo {
         margin-right: 30px;
@@ -238,6 +242,21 @@ header {
             max-width: 40px;
         }
     }
+}
+
+footer {
+  height: 75px;
+  padding: 0 30px;
+
+  .palatte-info {
+    span {
+      display: inline-block;
+      font-weight: bold;
+      &.emoji {
+        margin-left: 10px;
+      }
+    }
+  }
 }
 
 .MuiPaper-root {
