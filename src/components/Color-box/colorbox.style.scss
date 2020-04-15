@@ -1,7 +1,63 @@
+body {
+  font-family: 'Poppins', sans-serif;
+}
+.flex {
+  display: flex;
+
+  &.flex-inline {
+    display: inline-flex;
+  }
+
+  &.flex-row {
+    flex-direction: row;
+  }
+
+  &.flex-wrap {
+    flex-wrap: wrap;
+  }
+
+  &.flex-column {
+    flex-direction: column;
+  }
+
+  &.jc-center {
+    justify-content: center;
+  }
+
+  &.jc-sb {
+    justify-content: space-between;
+  }
+
+  &.jc-sa {
+    justify-content: space-around;
+  }
+
+  &.jc-end {
+    justify-content: flex-end;
+  }
+
+  &.jc-start {
+    justify-content: flex-start;
+  }
+
+  &.ai-center {
+    align-items: center;
+  }
+
+  &.ai-start {
+    align-items: flex-start;
+  }
+
+  &.ai-end {
+    align-items: flex-end;
+  }
+}
+
 .Palette {
     height: 100vh;
     overflow: hidden;
 }
+
 .Palette-colors {
     display: flex;
     justify-content: flex-start;
@@ -9,6 +65,7 @@
     flex-wrap: wrap;
     height: 90%;
 }
+
 .ColorBox {
     display: flex;
     flex: 0 1 20%;
@@ -139,4 +196,47 @@
             opacity: 1;
         }
     }
+}
+.slider-wrapper {
+    .info {
+        margin-right: 20px;
+    }
+    .slider {
+        width: 340px;
+        margin: 0 10px;
+    
+        .rc-slider-track {
+            background-color: transparent;
+        }
+    
+        .rc-slider-handle {
+            &,&:active,&:hover,&:focus {
+                width: 13px;
+                height: 13px;
+                position: relative;
+                top: 2px;
+                background-color: green;
+                outline: none;
+                box-shadow: none;
+                border: 2px solid green;
+            }
+        }
+    
+        .rc-slider-rail {
+            height: 8px;
+        }
+    }
+}
+
+
+header {
+    height: 80px;
+    padding: 0 30px;
+    .logo {
+        margin-right: 30px;
+        .svg {
+            max-width: 40px;
+        }
+    }
+    
 }

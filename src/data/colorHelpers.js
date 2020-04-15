@@ -9,7 +9,7 @@ function generatePalette(starterPalette) {
     colors: {}
   };
   for (let level of levels) {
-    newPalette.colors[level] = [];
+    newPalette.colors[level] = []; 
   }
   for (let color of starterPalette.colors) {
     let scale = getScale(color.color, 10).reverse();
