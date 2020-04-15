@@ -35,8 +35,10 @@
     ]
   },
   "devDependencies": {
+    "chroma-js": "^2.1.0",
     "gh-pages": "^2.2.0",
     "node-sass": "^4.13.1",
+    "rc-slider": "^9.2.4",
     "react-copy-to-clipboard": "^5.0.2",
     "react-router-dom": "^5.1.2",
     "styled-components": "^5.1.0"
