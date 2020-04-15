@@ -6,15 +6,16 @@ class ColorBox extends Component {
     constructor(props){
         super(props);
 
-
         this.state = {
             copied: false
         };
     }
 
     changeCopyState = () => {
-        this.setState({copied: true}, () => {
-            setTimeout(()=> this.setState({ copied: false}),1500)
+        this.setState({
+            copied: true
+        }, () => {
+            setTimeout(()=> this.setState({ copied: !this.state.copied}),1500)
         })
     }
 
