@@ -1,21 +1,30 @@
 import React, { Component } from 'react'
-import { Link } from 'react-router-dom';
+import MiniPalette from '../../MiniPalette/MiniPalette';
+import { withStyles } from '@material-ui/styles';
 
+const styles = {
+    root: {
+        background: 'blue'
+    }
+}
 
-export default class PaletteList extends Component {
+class PaletteList extends Component {
     render() {
-        const {palettes} = this.props
+        const {palettes, classes} = this.props
         return (
-            <div>
+            <div className={classes.root}>
                 <h1>React Colors</h1>
-                <ul>
+                
+                <div className='flex ai-center jc-sb flex-wrap'>
                     {
                         palettes.map( (palette) => (
-                            <li><Link to={`/react-colors-project/palette/${palette.id}`}>{palette.paletteName}</Link></li>
+                            <MiniPalette {...palette}/>
                         ) )
                     }
-                </ul>
+                </div>
             </div>
         )
     }
 }
+
+export default withStyles(styles)(PaletteList);
