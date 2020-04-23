@@ -1,4 +1,5 @@
-export default [{
+export default [
+    {
         paletteName: "Material UI Colors",
         id: "material-ui-colors",
         emoji: "🎨",
