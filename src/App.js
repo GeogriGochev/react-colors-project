@@ -4,29 +4,48 @@ import Palette from './components/Sections/Palette/Palette.component';
 import seedColors from './data/seedColors';
 import { generatePalette } from './data/colorHelpers';
 import PaletteList from './components/Sections/PaletteList/PaletteList';
+import SingleColorPalette from './components/Sections/SingleColorPalette/SingleColorPalette';
 
 class App extends Component {
   findPalette = (id) => {
-    return seedColors.find(function(palette){
-      return palette.id === id
-    })
+        return seedColors.find(function(palette){
+            return palette.id === id
+        })
   }
   render() {    
     return (
       <Switch>
-        <Route exact path='/react-colors-project/' render ={() => <PaletteList palettes={seedColors} /> } />
+        {/** root */}
         <Route 
-          path='/react-colors-project/palette/:id'
-          render={
-            routerProps => (
-              <Palette palette={generatePalette(this.findPalette(routerProps.match.params.id))}/>
-            )
-          }
+            exact 
+            path={`/react-colors-project/`} 
+            render ={
+                (routeProps) =><PaletteList palettes={seedColors} {...routeProps}/>
+            }
+        />
+        {/** single palette box */}
+        <Route 
+            exact
+            path={`/react-colors-project/palette/:id`}
+            render={
+                routerProps => (
+                <Palette palette={generatePalette(this.findPalette(routerProps.match.params.id))}/>
+                )
+            }
+        />
+        {/** inner palette color variations*/}
+        <Route 
+            exact
+            path={`/react-colors-project/palette/:paletteId/:colorid`}
+            render={
+                routerProps => (
+                <SingleColorPalette
+                    colorId={routerProps.match.params.colorid}
+                    palette={generatePalette(this.findPalette(routerProps.match.params.paletteId))}/>
+                )
+            }
         />
       </Switch>
-      // <div >
-      //   <Palette palette={generatePalette(seedColors[4])}/>
-      // </div>
     )
   }
 }

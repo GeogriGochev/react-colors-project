@@ -1,6 +1,6 @@
 import React from 'react';
 import { withStyles } from '@material-ui/styles';
-import { Link } from 'react-router-dom';
+// import { Link } from 'react-router-dom';
 
 
 const styles = {
@@ -13,6 +13,7 @@ const styles = {
         position: 'relative',
         boxShadow: '0px 1px 5px 0px rgba(0,0,0,0.75)',
         marginBottom: '30px',
+        cursor: 'pointer',
         '& a' : {
             position: 'absolute',
             top: '0',
@@ -36,26 +37,20 @@ const styles = {
     }
 
 }
-
+// <Link to={`/react-colors-project/palette/${id}`}></Link>
 
 function MiniPalette(props) {
-    const { classes, paletteName, id, emoji, colors } = props;
+    const { classes, paletteName, emoji, colors, goToPalette } = props;
+    const miniColorBoxes  =  colors.map( color => (<span className={classes.singleColor} style={{background: color.color}}></span>))
     return (
-        <div className={`flex flex-wrap ${classes.minipalette}`}>
-            <Link to={`/react-colors-project/palette/${id}`}></Link>
+        <div className={`flex flex-wrap ${classes.minipalette}`} onClick = {goToPalette}>
             <div className={`flex ai-center flex-wrap ${classes.colors}`}>
-                {
-                    colors.map( color => (
-                        <span className={classes.singleColor} style={{background: color.color}}></span>
-                    ))
-                }
+                {miniColorBoxes}
             </div>
             <div className={`flex ai-center jc-sb ${classes.bottomPart}`}>
             <h3 className={classes.name}>{paletteName}</h3>
             <p className={classes.emoji}>{emoji}</p>
             </div>
-            
-
         </div>
     )
 }
