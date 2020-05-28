@@ -39,7 +39,7 @@ class Palette extends Component {
         ))
         return (
             <div className='Palette'>
-                <Header level={level} changeLevel={this.changeLevel} handleChangeColorType={this.handleChangeColorType}/>
+                <Header level={level} changeLevel={this.changeLevel} handleChangeColorType={this.handleChangeColorType} showSlider={true}/>
                 <div className='Palette-colors'>
                     {ColorBoxes}
                 </div>

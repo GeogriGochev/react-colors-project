@@ -38,25 +38,27 @@ class Header extends Component {
 
     render() {
         const {format, open} = this.state;
-        const {level, changeLevel} = this.props;
+        const {level, changeLevel, showSlider} = this.props;
         return (
             <header className='flex ai-center jc-sb'>
                 <div className='left flex ai-center'>
                     <NavLink to='/react-colors-project' className='logo'>
                         <Logo className='svg'/>
                     </NavLink>
-                    <div className='slider-wrapper flex ai-center'>
-                        <p className='info'>Level: {level}</p>
-                        <div className='slider'>
-                            <Slider
-                                defaultValue={level}
-                                min={100}
-                                step={100}
-                                max={900}
-                                onAfterChange={changeLevel}
-                            />
+                    {showSlider && (
+                        <div className='slider-wrapper flex ai-center'>
+                            <p className='info'>Level: {level}</p>
+                            <div className='slider'>
+                                <Slider
+                                    defaultValue={level}
+                                    min={100}
+                                    step={100}
+                                    max={900}
+                                    onAfterChange={changeLevel}
+                                />
+                            </div>
                         </div>
-                    </div>
+                    )}
                 </div>
                 <div className='right'>
                     <div className='select-container'>
