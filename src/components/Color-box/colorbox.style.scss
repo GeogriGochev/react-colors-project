@@ -60,6 +60,11 @@ a {
 
 .Palette {
   height: calc(100vh - 150px);
+  &.SingleColorPalette {
+    .ColorBox {
+      height: 50%;
+    }
+  }
 }
 
 .Palette-colors {
@@ -171,6 +176,11 @@ a {
         color: white;
         opacity: 0;
         transition: 0.25s ease-in-out;
+
+        &.back {
+          width: 120px;
+          opacity: 1;
+        }
     }
 
     .copy-container {
@@ -204,6 +214,10 @@ a {
         .copy-button {
             opacity: 1;
         }
+    }
+
+    &.black {
+      background-color: black;
     }
 }
 .slider-wrapper {
