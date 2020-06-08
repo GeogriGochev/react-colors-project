@@ -58,64 +58,6 @@ a {
   }
 }
 
-.slider-wrapper {
-    .info {
-        margin-right: 20px;
-    }
-    .slider {
-        width: 340px;
-        margin: 0 10px;
-    
-        .rc-slider-track {
-            background-color: transparent;
-        }
-    
-        .rc-slider-handle {
-            &,&:active,&:hover,&:focus {
-                width: 13px;
-                height: 13px;
-                position: relative;
-                top: 2px;
-                background-color: green;
-                outline: none;
-                box-shadow: none;
-                border: 2px solid green;
-            }
-        }
-    
-        .rc-slider-rail {
-            height: 8px;
-        }
-    }
-}
-
-
-header {
-    height: 75px;
-    padding: 0 30px;
-    .logo {
-        margin-right: 30px;
-        .svg {
-            max-width: 40px;
-        }
-    }
-}
-
-footer {
-  height: 75px;
-  padding: 0 30px;
-
-  .palatte-info {
-    span {
-      display: inline-block;
-      font-weight: bold;
-      &.emoji {
-        margin-left: 10px;
-      }
-    }
-  }
-}
-
 .MuiPaper-root {
   top: 66px !important;
 }
