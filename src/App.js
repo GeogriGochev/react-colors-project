@@ -5,6 +5,7 @@ import seedColors from './data/seedColors';
 import { generatePalette } from './data/colorHelpers';
 import PaletteList from './components/Sections/PaletteList/PaletteList';
 import SingleColorPalette from './components/Sections/SingleColorPalette/SingleColorPalette';
+import NewPaletteForm from './components/NewPaletteForm';
 
 class App extends Component {
   findPalette = (id) => {
@@ -23,6 +24,12 @@ class App extends Component {
                 (routeProps) =><PaletteList palettes={seedColors} {...routeProps}/>
             }
         />
+        {/** create palette */}
+        <Route 
+            exact 
+            path='/react-colors-project/palette/new' 
+            render={ () => <NewPaletteForm/>} 
+        />
         {/** single palette box */}
         <Route 
             exact
@@ -32,7 +39,7 @@ class App extends Component {
                 <Palette palette={generatePalette(this.findPalette(routerProps.match.params.id))}/>
                 )
             }
-        />
+        />        
         {/** inner palette color variations*/}
         <Route 
             exact
