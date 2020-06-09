@@ -4,53 +4,8 @@ import {Link} from 'react-router-dom';
 import Header from '../../Header/Header.component';
 import PaletteFooter from '../../PaletteFooter/PaletteFooter';
 import { withStyles } from '@material-ui/styles';
-
-
-const styles = {
-    Palette: {
-        height: 'calc(100vh - 150px)',
-    },
-    PaletteColors: {
-        display: 'flex',
-        justifyContent: 'flex-start',
-        alignItems: 'center',
-        flexWrap: ' wrap',
-        height: '100%'
-    },
-    ColorBox: {
-        height: '50%',
-        display: 'flex',
-        flex: '0 1 20%',
-        maxWidth: '20%',
-        position: 'relative',
-        cursor: 'pointer',
-        textTransform: 'uppercase',
-        '&:hover': {
-            copyButton: {
-                opacity: '1',
-            }
-        },
-        '&.black': {
-            backgroundColor: 'black',
-            justifyContent: 'center',
-            alignItems: 'center',
-        },
-        '&.black a': {
-            width: '100%',
-            height: '100%',
-            position: 'absolute',
-            cursor: 'pointer',
-            display: 'flex',
-            justifyContent: 'center',
-            alignItems: 'center',
-            top: '0',
-            left: '0',
-            right: '0',
-            bottom: '0',
-            color: 'white'
-        }
-    },
-}
+// import styles from '../../../styles/SingleColorPalette';
+import styles from '../../../styles/ColorBoxStyles';
 
  class SingleColorPalette extends Component {
     constructor(props){

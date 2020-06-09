@@ -1,21 +1,7 @@
 import React, { Component } from 'react'
 import { withStyles } from '@material-ui/styles';
+import styles from '../../styles/FooterStyles';
 
-const styles = {
-    Footer: {
-        height: '75px',
-        padding: '0 30px'
-    },
-    PalatteInfo: {
-        '& span': {
-            display: 'inline-block',
-            fontWeight: 'bold',
-            '&.emoji': {
-                marginLeft: '10px'
-            }
-        }
-    }
-}
 
 class Footer extends Component {
     render() {

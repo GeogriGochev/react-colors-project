@@ -1,4 +1,14 @@
 export default {
+    Palette: {
+        height: 'calc(100vh - 150px)',
+    },
+    PaletteColors: {
+        display: 'flex',
+        justifyContent: 'flex-start',
+        alignItems: 'center',
+        flexWrap: ' wrap',
+        height: '100%'
+    },
     ColorBox: {
         height: '25%',
         display: 'flex',
@@ -17,6 +27,20 @@ export default {
         '&:hover $copyButton': {
             opacity: '1',
         },
+        '&.black a': {
+            width: '100%',
+            height: '100%',
+            position: 'absolute',
+            cursor: 'pointer',
+            display: 'flex',
+            justifyContent: 'center',
+            alignItems: 'center',
+            top: '0',
+            left: '0',
+            right: '0',
+            bottom: '0',
+            color: 'white'
+        }
     },
     copyOverlay: {
         position:'absolute',
