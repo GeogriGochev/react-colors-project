@@ -6,10 +6,48 @@ import MenuItem from '@material-ui/core/MenuItem';
 import Snackbar from '@material-ui/core/Snackbar';
 import IconButton from '@material-ui/core/IconButton';
 import CloseIcon from '@material-ui/icons/Close';
-
+import { withStyles } from '@material-ui/styles';
 import {ReactComponent as Logo} from '../../assets/images/color-picker.svg';
-
 import 'rc-slider/assets/index.css';
+
+const styles = {
+    Header: {
+        height: '75px',
+        padding:'0 30px',
+    },
+    Logo: {
+        marginRight: '30px',
+        '& $svg': {
+            maxWidth: '40px'
+        }
+    },
+    Info: {
+        marginRight: '20px',
+    },
+    slider: {
+        width: '340px',
+        margin: '0 10px',
+        '& .rc-slider-track': {
+            backgroundColor: 'transparent'
+        },
+        '& .rc-slider-handle': {
+            '& ,&:active, &:hover, &:focus': {
+                width: '13px',
+                height: '13px',
+                position: 'relative',
+                top: '2px',
+                backgroundColor: 'green',
+                outline: 'none',
+                boxShadow: 'none',
+                border: '2px solid green'
+            }
+        },
+        '& .rc-slider-rail': {
+            height: '8px'
+        }
+    }
+    
+}
 
 class Header extends Component {
     constructor(props) {
@@ -38,17 +76,17 @@ class Header extends Component {
 
     render() {
         const {format, open} = this.state;
-        const {level, changeLevel, showSlider} = this.props;
+        const {level, changeLevel, showSlider, classes} = this.props;
         return (
-            <header className='flex ai-center jc-sb'>
+            <header className={`${classes.Header} flex ai-center jc-sb`}>
                 <div className='left flex ai-center'>
-                    <NavLink to='/react-colors-project' className='logo'>
-                        <Logo className='svg'/>
+                    <NavLink to='/react-colors-project' className={classes.Logo}>
+                        <Logo className={classes.svg}/>
                     </NavLink>
                     {showSlider && (
                         <div className='slider-wrapper flex ai-center'>
-                            <p className='info'>Level: {level}</p>
-                            <div className='slider'>
+                            <p className={classes.Info}>Level: {level}</p>
+                            <div className={classes.slider}>
                                 <Slider
                                     defaultValue={level}
                                     min={100}
@@ -97,4 +135,4 @@ class Header extends Component {
     }
 }
 
-export default Header;
+export default withStyles(styles)(Header);

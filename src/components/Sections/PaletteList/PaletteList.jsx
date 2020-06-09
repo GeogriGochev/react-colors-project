@@ -32,7 +32,7 @@ class PaletteList extends Component {
     }
 
     render() {
-        const {palettes, classes} = this.props
+        const {palettes, classes} = this.props;
         return (
             <div className={classes.root}>
                 <div className={`flex ai-center jc-sb ${classes.heading}`}>
