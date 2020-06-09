@@ -7,7 +7,6 @@ const styles = {
     root: {
         background: 'blue'
     },
-    
     heading: {
         padding: '30px',
         margin: '0 0 30px',
@@ -20,6 +19,9 @@ const styles = {
             fontSize: '16px' 
         }
     },
+    main: {
+        padding: '0 30px 30px',
+    }
     
 }
 
@@ -37,7 +39,7 @@ class PaletteList extends Component {
                     <h1 className={classes.label}>React Colors</h1>
                     <Link className={classes.link} to='/react-colors-project/palette/new'>Create palette</Link>
                 </div>
-                <div className='flex ai-center jc-sb flex-wrap'>
+                <div className={`flex ai-center jc-sb flex-wrap ${classes.main}`}>
                     {
                         palettes.map( (palette) => (
                             <MiniPalette {...palette} goToPalette={() => this.goToPalette(palette.id)}/>
