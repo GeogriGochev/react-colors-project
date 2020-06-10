@@ -5,7 +5,7 @@ import seedColors from './data/seedColors';
 import { generatePalette } from './data/colorHelpers';
 import PaletteList from './components/Sections/PaletteList/PaletteList';
 import SingleColorPalette from './components/Sections/SingleColorPalette/SingleColorPalette';
-import NewPaletteForm from './components/NewPaletteForm';
+import NewPaletteForm from './components/newPaletteForm/NewPaletteForm';
 
 class App extends Component {
   findPalette = (id) => {

@@ -85,7 +85,7 @@ export default {
             color: 'white',
             fontWeight: '400',
             fontSize: '4rem',
-            background: 'rgba(black, 0.2)',
+            background: 'rgba(0, 0, 0, 0.2)',
             marginBottom: '30px',
         },
         '& span': {
