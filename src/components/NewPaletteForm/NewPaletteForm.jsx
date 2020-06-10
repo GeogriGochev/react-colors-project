@@ -1,10 +1,12 @@
 import React, { Component } from 'react';
 import Button from '@material-ui/core/Button';
-import {ReactComponent as Icon} from '../assets/images/palette.svg';
-import GoBack from '../assets/images/back.png';
+import { withStyles } from '@material-ui/styles';
+import {ReactComponent as Icon} from '../../assets/images/palette.svg';
+import GoBack from '../../assets/images/back.png';
+import styles from '../../styles/NewPaletteFormStyles';
 
 
-export default class NewPaletteForm extends Component {
+class NewPaletteForm extends Component {
     constructor(props){
         super(props);
 
@@ -53,3 +55,5 @@ export default class NewPaletteForm extends Component {
         )
     }
 }
+
+export default withStyles(styles)(NewPaletteForm);
