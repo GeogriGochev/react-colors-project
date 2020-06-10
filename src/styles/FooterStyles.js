@@ -8,7 +8,10 @@ export default {
             display: 'inline-block',
             fontWeight: 'bold',
             '&.emoji': {
-                marginLeft: '10px'
+                marginLeft: '10px',
+                '& svg': {
+                    maxWidth: '25px'
+                }
             }
         }
     }
