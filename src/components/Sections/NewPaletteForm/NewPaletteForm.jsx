@@ -1,9 +1,9 @@
 import React, { Component } from 'react';
 import Button from '@material-ui/core/Button';
 import { withStyles } from '@material-ui/styles';
-import {ReactComponent as Icon} from '../../assets/images/palette.svg';
-import GoBack from '../../assets/images/back.png';
-import styles from '../../styles/NewPaletteFormStyles';
+import {ReactComponent as Icon} from '../../../assets/images/palette.svg';
+import GoBack from '../../../assets/images/back.png';
+import styles from '../../../styles/NewPaletteFormStyles';
 
 
 class NewPaletteForm extends Component {

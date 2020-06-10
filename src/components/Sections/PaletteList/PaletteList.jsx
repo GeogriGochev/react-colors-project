@@ -2,6 +2,7 @@ import React, { Component } from 'react'
 import MiniPalette from '../../MiniPalette/MiniPalette';
 import {Link} from 'react-router-dom';
 import { withStyles } from '@material-ui/styles';
+import background from '../../../assets/images/back.jpg';
 import styles from '../../../styles/PaletteListStyles';
 
 
@@ -15,6 +16,7 @@ class PaletteList extends Component {
         const {palettes, classes} = this.props;
         return (
             <div className={classes.root}>
+                <img className={classes.background} src={background} alt="background"/>
                 <div className={`flex ai-center jc-sb ${classes.heading}`}>
                     <h1 className={classes.label}>React Colors</h1>
                     <Link className={classes.link} to='/react-colors-project/palette/new'>Create palette</Link>
