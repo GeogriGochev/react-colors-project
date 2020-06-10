@@ -22,8 +22,8 @@ export default class NewPaletteForm extends Component {
         const {opened} = this.state;
         return (
             <div className= 'palette-form'>
-                <div className={`overlay ${opened && 'active'}`}></div>
-                <div className={`side ${opened && 'active'}`}>
+                <div className={`overlay ${opened === true ?'active': ''}`}></div>
+                <div className={`side ${opened === true ?'active': ''}`}>
                     <div className="top flex ai-center jc-end" onClick={this.toggleSidebar}>
                        <img src={GoBack} alt="go back"/>
                     </div>
