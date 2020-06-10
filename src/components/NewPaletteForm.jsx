@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import Button from '@material-ui/core/Button';
 import {ReactComponent as Icon} from '../assets/images/palette.svg';
+import GoBack from '../assets/images/back.png';
 
 
 export default class NewPaletteForm extends Component {
@@ -8,26 +9,36 @@ export default class NewPaletteForm extends Component {
         super(props);
 
         this.state= {
-            opened: true
+            opened: false
         }
     }
+
+    toggleSidebar = () => {
+        this.setState({
+            opened: !this.state.opened
+        })
+    }
     render() {
+        const {opened} = this.state;
         return (
             <div className= 'palette-form'>
-                <div className='side'>
-                    
+                <div className={`overlay ${opened && 'active'}`}></div>
+                <div className={`side ${opened && 'active'}`}>
+                    <div className="top flex ai-center jc-end" onClick={this.toggleSidebar}>
+                       <img src={GoBack} alt="go back"/>
+                    </div>
                 </div>
                 <div className='main-content'>
                     <div className='app-nav flex jc-sb ai-center'>
-                        <div className="left">
-                            <div className='create flex ai-center'>
+                        <div className='left'>
+                            <div className='create flex ai-center' onClick={this.toggleSidebar}>
                                 <Icon className='svg'/>
                                 <span>Create A palette</span>
                             </div>
                         </div>
                         <div className="right buttons flex ai-center">
                         <Button variant="contained" color="secondary">
-                            Secondary
+                            Go back
                         </Button>
                         <Button variant="contained" color="primary">
                             Primary
