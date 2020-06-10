@@ -61,3 +61,74 @@ a {
 .MuiPaper-root {
   top: 66px !important;
 }
+
+.palette-form {
+  position: relative;
+  overflow: hidden;
+  height: 100vh;
+  .overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    opacity: 0;
+    z-index: -1;
+    background-color: rgba(0, 0, 0, 0.5);
+    transition: 0.3s ease-in-out;
+
+    &.active {
+      opacity: 1;
+      z-index: 10;
+    }
+  }
+  .app-nav {
+    height: 75px;
+    padding: 0 30px;
+    border-bottom: 1px solid #f4f4f4;
+    box-shadow: -5px 5px 20px rgba(8,42,62,.05);
+
+    .left {
+      .create {
+        cursor: pointer;
+        svg {
+          max-width: 50px;
+          margin-right: 10px;
+        }
+      }
+    }
+    .right {
+      button {
+        & + button {
+          margin-left: 20px;
+        }
+      }
+    }
+  }
+  .side {
+    position: absolute;
+    background-color: white;
+    top: 0;
+    left: 0;
+    width: 25%;
+    height: 100%;
+    z-index: 11;
+    transform: translateX(-100%);
+    opacity: 0;
+    transition: 0.5s cubic-bezier(.07,.08,.16,.99);;
+    &.active {
+      opacity: 1;
+      transform: translateX(0);
+    }
+    .top {
+      height: 75px;
+      border-bottom: 1px solid #f4f4f4;
+      box-shadow: -5px 5px 20px rgba(8,42,62,.05);
+      img {
+        max-width: 20px;
+        margin-right: 20px;
+        cursor: pointer;
+      }
+    }
+  }
+}
