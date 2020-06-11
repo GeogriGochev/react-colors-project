@@ -25,6 +25,11 @@ export default {
         '& a': {
             color: 'black',
             fontSize: '16px' 
+        },
+        '& .logo': {
+            maxWidth: '30px',
+            height: 'auto',
+            marginRight: '15px'
         }
     },
     main: {
