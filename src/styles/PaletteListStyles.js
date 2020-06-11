@@ -1,6 +1,6 @@
 export default {
     root: {
-        position: 'relative'
+        position: 'relative',
     },
     background: {
         position: 'absolute',
@@ -20,17 +20,18 @@ export default {
         margin: '0 0 30px',
         '& h1': {
             margin: '0',
-            color: 'black'
+            color: 'black',
+            fontSize: '20px',
+            '& svg': {
+                maxWidth: '30px',
+                height: 'auto',
+                marginRight: '15px'
+            }
         },
         '& a': {
             color: 'black',
             fontSize: '16px' 
         },
-        '& .logo': {
-            maxWidth: '30px',
-            height: 'auto',
-            marginRight: '15px'
-        }
     },
     main: {
         position: 'relative',
