@@ -23,8 +23,14 @@ class NewPaletteForm extends Component {
         })
     }
     changeColor = (newColor) => {
-        console.log(newColor.hex);
-        
+        this.setState({
+            defaultColor: newColor.hex
+        })
+    }
+    addColor = () => {
+        this.setState({
+            colors: [...this.state.colors,this.state.defaultColor]
+        })
     }
     render() {
         const {opened, defaultColor} = this.state;
@@ -51,7 +57,7 @@ class NewPaletteForm extends Component {
                             </div>
                             <div className="input"></div>
                             <div className="btn-wrapper">
-                                <Button >
+                                <Button variant="contained" color="primary" style={{backgroundColor: defaultColor}}>
                                     Add Color
                                 </Button>
                             </div>
