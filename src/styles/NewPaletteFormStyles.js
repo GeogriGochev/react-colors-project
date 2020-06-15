@@ -45,6 +45,11 @@ export default {
     ColorPicker: {
         margin: '30px 0'
     },
+    inputWrapper: {
+        '& button': {
+            marginTop: '30px',
+        }
+    },
     Top: {
         height: '75px',
         borderBottom: '1px solid #f4f4f4',
@@ -64,5 +69,8 @@ export default {
         '&.active': {
             width: 'calc(100% - 400px)'
         }
+    },
+    content: {
+        height: 'calc(100vh - 76px)',
     }
 }

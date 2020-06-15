@@ -4,7 +4,9 @@ import { withStyles } from '@material-ui/styles';
 import {ReactComponent as Icon} from '../../../assets/images/palette.svg';
 import GoBack from '../../../assets/images/back.png';
 import { ChromePicker } from 'react-color';
+import { ValidatorForm, TextValidator } from 'react-material-ui-form-validator';
 import styles from '../../../styles/NewPaletteFormStyles';
+import DraggableColorBox from '../../DragggableColorBox/DragggableColorBox';
 
 class NewPaletteForm extends Component {
     constructor(props){
@@ -12,10 +14,23 @@ class NewPaletteForm extends Component {
 
         this.state= {
             opened: false,
-            defaultColor: 'tomato',
-            colors: []
+            defaultColor: 'teal',
+            newName: 'Teal',
+            colors: [{color: 'blue', name:'blue'}]
         }
     }
+
+    componentDidMount() {
+        ValidatorForm.addValidationRule('isColorNameUnique', value => {
+            const sameName = ({name}) => name.toLowerCase() !== value.toLowerCase();
+            return this.state.colors.every(sameName);
+        });
+        ValidatorForm.addValidationRule('isColorUnique', value => {
+            const sameColor = ({color}) => color !== this.state.defaultColor;
+            return this.state.colors.every(sameColor);
+        });
+    }
+
 
     toggleSidebar = () => {
         this.setState({
@@ -27,13 +42,23 @@ class NewPaletteForm extends Component {
             defaultColor: newColor.hex
         })
     }
+    handleChange = (evt) => {
+        this.setState({newName: evt.target.value})        
+    }
     addColor = () => {
+        const newColor = {
+            color: this.state.defaultColor,
+            name: this.state.newName,
+        }
         this.setState({
-            colors: [...this.state.colors,this.state.defaultColor]
+            colors: [...this.state.colors,newColor],
+            newName: ''
         })
     }
+
+
     render() {
-        const {opened, defaultColor} = this.state;
+        const {opened, defaultColor,colors, newName} = this.state;
         const {classes} = this.props;
         return (
             <div className={`${classes.PaletteForm} flex jc-end`}>
@@ -55,11 +80,26 @@ class NewPaletteForm extends Component {
                             <div className={`${classes.ColorPicker}`}>
                                 <ChromePicker color={defaultColor} onChangeComplete={this.changeColor}/>
                             </div>
-                            <div className="input"></div>
-                            <div className="btn-wrapper">
-                                <Button variant="contained" color="primary" style={{backgroundColor: defaultColor}}>
+                            <div className={`${classes.inputWrapper}`}>
+                                <ValidatorForm onSubmit={this.addColor} className='flex flex-column jc-start ai-start'>
+                                    <TextValidator
+                                        value ={newName}
+                                        onChange= {this.handleChange}
+                                        validators={[
+                                            'required',
+                                            'isColorNameUnique',
+                                            'isColorUnique'
+                                        ]}
+                                        errorMessages={[
+                                            'Enter a color name',
+                                            'Color name is not unique...',
+                                            'Color already used!'
+                                        ]}
+                                    />
+                                     <Button variant="contained" color="primary" style={{backgroundColor: defaultColor}} type='submit'>
                                     Add Color
-                                </Button>
+                                    </Button>
+                                </ValidatorForm>
                             </div>
                        </div>
                     </div>
@@ -81,8 +121,12 @@ class NewPaletteForm extends Component {
                             </Button>
                         </div>
                     </div>
-                    <div className='content'>
-
+                    <div className={`${classes.content} flex ai-start flex-wrap`}>
+                         {
+                            colors.map(color => (
+                                <DraggableColorBox color={color.color} name={color.name}/>
+                            ))
+                        }
                     </div>
                 </div>
             </div>

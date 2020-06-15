@@ -3,6 +3,9 @@ export default {
         height: '75px',
         padding:'0 30px',
     },
+    left: {
+        maxHeight: '75px'
+    },
     Logo: {
         marginRight: '30px',
         '& $svg': {

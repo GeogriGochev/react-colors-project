@@ -41,8 +41,9 @@ class Header extends Component {
         const {format, open} = this.state;
         const {level, changeLevel, showSlider, classes} = this.props;
         return (
-            <header className={`${classes.Header} flex ai-center jc-sb`}>
-                <div className='left flex ai-center'>
+            <header className={`${classes.Header} `}>
+                <div className="container flex ai-center jc-sb">
+                <div className={`flex ai-center ${classes.left}`}>
                     <NavLink to='/react-colors-project' className={classes.Logo}>
                         <Logo className={classes.svg}/>
                     </NavLink>
@@ -93,6 +94,7 @@ class Header extends Component {
                         </IconButton>
                     ]}
                 />
+                </div>
             </header>
         )
     }

@@ -6,6 +6,13 @@ body {
 a {
   text-decoration: none;
 }
+
+.container {
+  width: 100%;
+  max-width: calc(100% - 10%);
+  margin: auto;
+}
+
 .flex {
   display: flex;
 
