@@ -55,7 +55,16 @@ class NewPaletteForm extends Component {
             newName: ''
         })
     }
-
+    handleSavePalette = () => {
+        let namePalette = 'new test palette';
+        const newPalette = {
+            paletteName: namePalette,
+            id:  namePalette.toLowerCase().replace(/ /g, '_'),
+            colors: this.state.colors,
+        }
+        this.props.savePalette(newPalette);
+        this.props.history.push('/react-colors-project')
+    }
 
     render() {
         const {opened, defaultColor,colors, newName} = this.state;
@@ -116,7 +125,7 @@ class NewPaletteForm extends Component {
                             <Button variant="contained" color="secondary">
                                 Go back
                             </Button>
-                            <Button variant="contained" color="primary">
+                            <Button variant="contained" color="primary" onClick={this.handleSavePalette}>
                                 Save Palette
                             </Button>
                         </div>
