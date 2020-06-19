@@ -7,6 +7,7 @@ import { ChromePicker } from 'react-color';
 import { ValidatorForm, TextValidator } from 'react-material-ui-form-validator';
 import styles from '../../../styles/NewPaletteFormStyles';
 import DraggableColorBox from '../../DragggableColorBox/DragggableColorBox';
+import {ReactComponent as Close} from '../../../assets/images/close-button.svg';
 
 class NewPaletteForm extends Component {
     constructor(props){
@@ -14,9 +15,18 @@ class NewPaletteForm extends Component {
 
         this.state= {
             opened: false,
+            overlayOpen: false,
+            popPaletteFormOpen:false,
             defaultColor: 'teal',
             newName: 'Teal',
-            colors: [{color: 'blue', name:'blue'}]
+            newPaletteName: '',
+            colors: [
+                {
+                    id: 'blue',
+                    color: 'blue',
+                    name:'blue'
+                }
+            ]
         }
     }
 
@@ -28,6 +38,10 @@ class NewPaletteForm extends Component {
         ValidatorForm.addValidationRule('isColorUnique', value => {
             const sameColor = ({color}) => color !== this.state.defaultColor;
             return this.state.colors.every(sameColor);
+        });
+        ValidatorForm.addValidationRule('isPaletteNameUnique', value => {
+            const samePaletteNames = ({paletteName}) => paletteName.toLowerCase() !== value.toLowerCase();
+            return  this.props.palettes.every(samePaletteNames);
         });
     }
 
@@ -42,11 +56,15 @@ class NewPaletteForm extends Component {
             defaultColor: newColor.hex
         })
     }
-    handleChange = (evt) => {
+    handleChange = evt => {
         this.setState({newName: evt.target.value})        
+    }
+    handlePaletteNameChange = evt => {
+        this.setState({newPaletteName: evt.target.value})
     }
     addColor = () => {
         const newColor = {
+            id:  this.state.newName.toLowerCase().replace(/ /g, '_'),
             color: this.state.defaultColor,
             name: this.state.newName,
         }
@@ -55,8 +73,11 @@ class NewPaletteForm extends Component {
             newName: ''
         })
     }
+    GoBack = () => {
+        this.props.history.push('/react-colors-project');
+    }
     handleSavePalette = () => {
-        let namePalette = 'new test palette';
+        let namePalette = this.state.newPaletteName;
         const newPalette = {
             paletteName: namePalette,
             id:  namePalette.toLowerCase().replace(/ /g, '_'),
@@ -65,17 +86,30 @@ class NewPaletteForm extends Component {
         this.props.savePalette(newPalette);
         this.props.history.push('/react-colors-project')
     }
+    popPaletteForm = () => {
+        this.setState({
+            overlayOpen: !this.state.overlayOpen,
+            popPaletteFormOpen: !this.state.popPaletteFormOpen
+        })
+    }
+    removeColor = (colorName) => {
+        console.log(colorName);
+        this.setState({
+            colors: this.state.colors.filter(color => color.name !== colorName)
+        })
+    }
 
     render() {
-        const {opened, defaultColor,colors, newName} = this.state;
+        const {opened, defaultColor,colors, newName,overlayOpen,popPaletteFormOpen, newPaletteName} = this.state;
         const {classes} = this.props;
         return (
-            <div className={`${classes.PaletteForm} flex jc-end`}>
-                <div className={`${classes.Side} ${opened === true ?'active': ''}`}>
+            <div className={`${classes.PaletteForm} ${overlayOpen === true ? 'active' : ''} flex jc-end`}>
+                <div className={`overlay ${overlayOpen === true ? 'active' : ''}`} onClick={this.popPaletteForm}></div>
+                <div className={`${classes.Side} ${opened === true ? 'active' : ''}`}>
                     <div className={`${classes.Top} flex ai-center jc-end`} onClick={this.toggleSidebar}>
                        <img src={GoBack} alt="go back"/>
                     </div>
-                    <div className="color-picker-wrapper flex ai-center jc-center">
+                    <div className={`${classes.colorPickerWrapper} flex ai-center jc-center`}>
                        <div className="wrapper">
                             <h2 className="label">Design your palette</h2>
                             <div className="buttons-wrapper flex ai-center">
@@ -113,7 +147,7 @@ class NewPaletteForm extends Component {
                        </div>
                     </div>
                 </div>
-                <div className={`${classes.MainContent} ${opened === true ?'active': ''}`}>
+                <div className={`${classes.MainContent} ${opened === true ? 'active' : ''}`}>
                     <div className={`${classes.AppNav} flex jc-sb ai-center'`}>
                         <div className='left flex ai-center'>
                             <div className={`${classes.Create} flex ai-center`} onClick={this.toggleSidebar}>
@@ -122,21 +156,49 @@ class NewPaletteForm extends Component {
                             </div>
                         </div>
                         <div className="right buttons flex ai-center">
-                            <Button variant="contained" color="secondary">
+                            <Button variant="contained" color="secondary" onClick={this.GoBack}>
                                 Go back
                             </Button>
-                            <Button variant="contained" color="primary" onClick={this.handleSavePalette}>
+                            <Button variant="contained" color="primary" onClick={this.popPaletteForm}>
                                 Save Palette
                             </Button>
                         </div>
                     </div>
                     <div className={`${classes.content} flex ai-start flex-wrap`}>
                          {
-                            colors.map(color => (
-                                <DraggableColorBox color={color.color} name={color.name}/>
+                            colors.map( color => (
+                                <DraggableColorBox color={color.color} name={color.name} removeColor={() => this.removeColor(color.name)}/>
                             ))
                         }
                     </div>
+                </div>
+                <div className={`save-palette-form ${popPaletteFormOpen === true ? 'active' : ''}`}>
+                        <Close className='svg close-icon' onClick={this.popPaletteForm}/>
+                        <ValidatorForm onSubmit={this.handleSavePalette} className='flex flex-column jc-sb ai-start'>
+                            <div className='top'>
+                                <h3 className='title'>Choose A Palette Name</h3>
+                                <p>Please enter a name for your new palette. it needs to be unique!</p>
+                                <TextValidator
+                                    label='Palette Name'
+                                    value ={newPaletteName}
+                                    onChange= {this.handlePaletteNameChange}
+                                    validators={[
+                                        'required',
+                                        'isPaletteNameUnique'
+                                    ]}
+                                    errorMessages={[
+                                        'Enter A Palette Name',
+                                        'Palete Name not unique!'
+                                    ]}
+                                />
+                            </div>
+                            <div className='buttons-wrapper flex ai-center'>
+                                <Button variant="contained" onClick={this.popPaletteForm}>close</Button>
+                                <Button variant="contained" color="primary" style={{backgroundColor: defaultColor}} type='submit'>
+                                    Add Color
+                                </Button>
+                            </div>
+                        </ValidatorForm>
                 </div>
             </div>
         )

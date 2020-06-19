@@ -9,7 +9,8 @@ export default {
     Logo: {
         marginRight: '30px',
         '& $svg': {
-            maxWidth: '40px'
+            maxWidth: '40px',
+            maxHeight: '40px'
         }
     },
     Info: {

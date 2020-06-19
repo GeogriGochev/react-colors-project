@@ -68,3 +68,67 @@ a {
 .MuiPaper-root {
   top: 66px !important;
 }
+
+.overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  z-index: -100;
+  background-color: rgba(black,0.6);
+  opacity: 0;
+  transition: 0.2s ease-in-out;
+  &.active {
+    opacity: 1;
+    z-index: 100;
+  }
+}
+
+.save-palette-form {
+  z-index: -100;
+  opacity: 0;
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 40%;
+  height: 40%;
+  border-radius: 15px;
+  overflow: hidden;
+  background-color: white;
+  padding: 30px;
+  transition: 0.2s ease-in-out;
+  border: 1px solid black;
+  &.active {
+    z-index: 101;
+    opacity: 1;
+  }
+
+  .close-icon {
+    position: absolute;
+    cursor: pointer;
+    top: 20px;
+    right: 20px;
+    width: 30px;
+    height: 30px;
+  }
+
+  form {
+    height: 100%;
+  }
+  .title {
+    margin-bottom: 40px;
+  }
+  p {
+    margin-bottom: 30px;
+  }
+  .buttons-wrapper {
+    align-self: flex-end;
+    button {
+      & + button {
+        margin-left: 20px;
+      }
+    }
+  }
+}

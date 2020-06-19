@@ -2,13 +2,21 @@ export default {
     PaletteForm: {
         position: 'relative',
         overflow: 'hidden',
-        height: '100vh'
+        height: '100vh',
+        '&.active': {
+            overflow: 'hidden'
+        }
     },
     AppNav: {
         height: '75px',
         padding: '0 30px',
         borderBottom: '1px solid #f4f4f4',
         boxShadow: '-5px 5px 20px rgba(8,42,62,.09)',
+        '& button': {
+            '& + button': {
+                marginLeft: '20px'
+            }
+        }
     },
     Create: {
         cursor: 'pointer',
@@ -40,6 +48,15 @@ export default {
         '&.active': {
             opacity: '1',
             transform: 'translateX(0)'
+        }        
+    },
+    colorPickerWrapper: {
+        '& .buttons-wrapper': {
+            '& button': {
+                '& + button': {
+                    marginLeft: '20px'
+                }
+            }
         }
     },
     ColorPicker: {
@@ -72,5 +89,6 @@ export default {
     },
     content: {
         height: 'calc(100vh - 76px)',
+        padding: '20px'
     }
 }

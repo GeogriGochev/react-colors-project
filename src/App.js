@@ -44,7 +44,7 @@ class App extends Component {
         <Route 
             exact 
             path='/react-colors-project/palette/new' 
-            render={ (routerProps) => <NewPaletteForm savePalette={this.savePalette} {...routerProps}/>} 
+            render={ (routerProps) => <NewPaletteForm palettes={this.state.palettes} savePalette={this.savePalette} {...routerProps}/>} 
         />
         {/** single palette box */}
         <Route 

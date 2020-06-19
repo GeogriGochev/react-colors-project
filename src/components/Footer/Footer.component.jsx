@@ -8,7 +8,7 @@ class Footer extends Component {
     render() {
         const {paletteName, classes} = this.props;
         return (
-            <footer className={`${classes.Footer} `}>
+            <footer className={`${classes.Footer} flex ai-center`}>
                 <div className="container flex ai-center jc-end">
                     <p className={`${classes.PalatteInfo}  flex ai-center`}>
                         <span className='name'>{paletteName}</span>

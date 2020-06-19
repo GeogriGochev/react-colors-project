@@ -14,7 +14,8 @@ export default {
             '&.emoji': {
                 marginLeft: '10px',
                 '& svg': {
-                    maxWidth: '25px'
+                    maxWidth: '25px',
+                    maxHeight: '25px'
                 }
             }
         }
