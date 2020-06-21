@@ -28,7 +28,7 @@ class PaletteList extends Component {
                         <div className="container flex ai-center jc-sb flex-wrap">
                             {
                                 palettes.map( (palette) => (
-                                    <MiniPalette {...palette} goToPalette={() => this.goToPalette(palette.id)}/>
+                                    <MiniPalette {...palette} key={palette.id} goToPalette={() => this.goToPalette(palette.id)}/>
                                 ) )
                             }
                         </div>

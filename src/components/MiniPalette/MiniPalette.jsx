@@ -4,7 +4,7 @@ import styles from '../../styles/MiniPaletteStyles';
 
 function MiniPalette(props) {
     const { classes, paletteName, emoji, colors, goToPalette } = props;
-    const miniColorBoxes  =  colors.map( color => (<span className={classes.singleColor} style={{background: color.color}}></span>))
+    const miniColorBoxes  =  colors.map( color => (<span className={classes.singleColor} key={color.color} style={{background: color.color}}></span>))
     return (
         <div className={`flex flex-wrap ${classes.minipalette}`} onClick = {goToPalette}>
             <div className={`flex ai-center flex-wrap ${classes.colors}`}>

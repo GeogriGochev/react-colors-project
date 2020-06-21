@@ -1,13 +1,14 @@
 import React, { Component } from 'react';
 import Button from '@material-ui/core/Button';
 import { withStyles } from '@material-ui/styles';
-import {ReactComponent as Icon} from '../../../assets/images/palette.svg';
-import GoBack from '../../../assets/images/back.png';
 import { ChromePicker } from 'react-color';
 import { ValidatorForm, TextValidator } from 'react-material-ui-form-validator';
-import styles from '../../../styles/NewPaletteFormStyles';
-import DraggableColorBox from '../../DragggableColorBox/DragggableColorBox';
+import {ReactComponent as Icon} from '../../../assets/images/palette.svg';
+import GoBack from '../../../assets/images/back.png';
+import DraggableColorList from '../../DraggableColorList/DraggableColorList.component';
+import arrayMove from 'array-move';
 import {ReactComponent as Close} from '../../../assets/images/close-button.svg';
+import styles from '../../../styles/NewPaletteFormStyles';
 
 class NewPaletteForm extends Component {
     constructor(props){
@@ -44,6 +45,12 @@ class NewPaletteForm extends Component {
             return  this.props.palettes.every(samePaletteNames);
         });
     }
+
+    onSortEnd = ({oldIndex, newIndex}) => {
+        this.setState(({colors}) => ({
+            colors: arrayMove(colors, oldIndex, newIndex),
+        }));
+    };
 
 
     toggleSidebar = () => {
@@ -101,7 +108,7 @@ class NewPaletteForm extends Component {
 
     render() {
         const {opened, defaultColor,colors, newName,overlayOpen,popPaletteFormOpen, newPaletteName} = this.state;
-        const {classes} = this.props;
+        const {classes} = this.props;        
         return (
             <div className={`${classes.PaletteForm} ${overlayOpen === true ? 'active' : ''} flex jc-end`}>
                 <div className={`overlay ${overlayOpen === true ? 'active' : ''}`} onClick={this.popPaletteForm}></div>
@@ -164,13 +171,15 @@ class NewPaletteForm extends Component {
                             </Button>
                         </div>
                     </div>
-                    <div className={`${classes.content} flex ai-start flex-wrap`}>
-                         {
-                            colors.map( color => (
-                                <DraggableColorBox color={color.color} name={color.name} removeColor={() => this.removeColor(color.name)}/>
-                            ))
-                        }
-                    </div>
+                    <DraggableColorList
+                        className={`${classes.content} flex ai-start flex-wrap`}
+                        colors={colors}
+                        removeColor={this.removeColor}
+                        axis='xy'
+                        onSortEnd ={this.onSortEnd}
+                        pressDelay={0}
+                        transitionDuration={400}
+                    />
                 </div>
                 <div className={`save-palette-form ${popPaletteFormOpen === true ? 'active' : ''}`}>
                         <Close className='svg close-icon' onClick={this.popPaletteForm}/>
@@ -195,7 +204,7 @@ class NewPaletteForm extends Component {
                             <div className='buttons-wrapper flex ai-center'>
                                 <Button variant="contained" onClick={this.popPaletteForm}>close</Button>
                                 <Button variant="contained" color="primary" style={{backgroundColor: defaultColor}} type='submit'>
-                                    Add Color
+                                    Add Palette
                                 </Button>
                             </div>
                         </ValidatorForm>
