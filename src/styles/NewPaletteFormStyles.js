@@ -88,7 +88,7 @@ export default {
         }
     },
     content: {
-        height: 'calc(100vh - 76px)',
+        height: 'calc(100vh - 115px)',
         padding: '20px'
     }
 }

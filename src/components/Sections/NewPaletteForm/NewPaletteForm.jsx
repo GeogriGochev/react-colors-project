@@ -1,14 +1,12 @@
 import React, { Component } from 'react';
-import Button from '@material-ui/core/Button';
 import { withStyles } from '@material-ui/styles';
-import { ChromePicker } from 'react-color';
-import { ValidatorForm, TextValidator } from 'react-material-ui-form-validator';
-import {ReactComponent as Icon} from '../../../assets/images/palette.svg';
-import GoBack from '../../../assets/images/back.png';
+import { ValidatorForm } from 'react-material-ui-form-validator';
 import DraggableColorList from '../../DraggableColorList/DraggableColorList.component';
 import arrayMove from 'array-move';
-import {ReactComponent as Close} from '../../../assets/images/close-button.svg';
 import styles from '../../../styles/NewPaletteFormStyles';
+import PaletteFormNav from '../../PaletteFormNav/PaletteFormNav.component';
+import PaletteFormSide from '../../PaletteFormSide/PaletteFormSide.component';
+import PopPaletteFrom from '../../PopPaletteForm/PopPaletteFrom.component';
 
 class NewPaletteForm extends Component {
     constructor(props){
@@ -21,13 +19,8 @@ class NewPaletteForm extends Component {
             defaultColor: 'teal',
             newName: 'Teal',
             newPaletteName: '',
-            colors: [
-                {
-                    id: 'blue',
-                    color: 'blue',
-                    name:'blue'
-                }
-            ]
+            maxColors: 20,
+            colors: [...this.props.palettes[0].colors]
         }
     }
 
@@ -75,10 +68,12 @@ class NewPaletteForm extends Component {
             color: this.state.defaultColor,
             name: this.state.newName,
         }
-        this.setState({
-            colors: [...this.state.colors,newColor],
-            newName: ''
-        })
+        if(this.state.colors.length < this.state.maxColors) {
+            this.setState({
+                colors: [...this.state.colors,newColor],
+                newName: ''
+            })
+        }
     }
     GoBack = () => {
         this.props.history.push('/react-colors-project');
@@ -105,72 +100,44 @@ class NewPaletteForm extends Component {
             colors: this.state.colors.filter(color => color.name !== colorName)
         })
     }
+    clearPalette = () => {
+        this.setState({colors: []})
+    }
+    addRandomColor = () => {
+        const allColors = this.props.palettes.map(p => p.colors).flat();
+        const ranNum = Math.floor(Math.random() * allColors.length);
+        const ranColor = allColors[ranNum];
+        if(this.state.colors.length < this.state.maxColors) {
+            this.setState({colors: [...this.state.colors,ranColor]})
+        }
+    }
 
     render() {
-        const {opened, defaultColor,colors, newName,overlayOpen,popPaletteFormOpen, newPaletteName} = this.state;
-        const {classes} = this.props;        
+        const {opened, defaultColor,colors, newName,overlayOpen,popPaletteFormOpen, newPaletteName,maxColors} = this.state;
+        const {classes} = this.props;       
+        const maxColorsReached = colors.length >= maxColors ;
         return (
             <div className={`${classes.PaletteForm} ${overlayOpen === true ? 'active' : ''} flex jc-end`}>
                 <div className={`overlay ${overlayOpen === true ? 'active' : ''}`} onClick={this.popPaletteForm}></div>
                 <div className={`${classes.Side} ${opened === true ? 'active' : ''}`}>
-                    <div className={`${classes.Top} flex ai-center jc-end`} onClick={this.toggleSidebar}>
-                       <img src={GoBack} alt="go back"/>
-                    </div>
-                    <div className={`${classes.colorPickerWrapper} flex ai-center jc-center`}>
-                       <div className="wrapper">
-                            <h2 className="label">Design your palette</h2>
-                            <div className="buttons-wrapper flex ai-center">
-                                <Button variant="contained" color="secondary">
-                                    clear palette
-                                </Button>
-                                <Button variant="contained" color="primary">
-                                    random color
-                                </Button>
-                            </div>
-                            <div className={`${classes.ColorPicker}`}>
-                                <ChromePicker color={defaultColor} onChangeComplete={this.changeColor}/>
-                            </div>
-                            <div className={`${classes.inputWrapper}`}>
-                                <ValidatorForm onSubmit={this.addColor} className='flex flex-column jc-start ai-start'>
-                                    <TextValidator
-                                        value ={newName}
-                                        onChange= {this.handleChange}
-                                        validators={[
-                                            'required',
-                                            'isColorNameUnique',
-                                            'isColorUnique'
-                                        ]}
-                                        errorMessages={[
-                                            'Enter a color name',
-                                            'Color name is not unique...',
-                                            'Color already used!'
-                                        ]}
-                                    />
-                                     <Button variant="contained" color="primary" style={{backgroundColor: defaultColor}} type='submit'>
-                                    Add Color
-                                    </Button>
-                                </ValidatorForm>
-                            </div>
-                       </div>
-                    </div>
+                    <PaletteFormSide
+                        toggleSidebar = {this.toggleSidebar}
+                        clearPalette = {this.clearPalette}
+                        changeColor = {this.changeColor}
+                        addColor = {this.addColor}
+                        addRandomColor = {this.addRandomColor}
+                        handleChange = {this.handleChange}
+                        maxColorsReached = {maxColorsReached}
+                        defaultColor = {defaultColor}
+                        newName = {newName}
+                    />
                 </div>
                 <div className={`${classes.MainContent} ${opened === true ? 'active' : ''}`}>
-                    <div className={`${classes.AppNav} flex jc-sb ai-center'`}>
-                        <div className='left flex ai-center'>
-                            <div className={`${classes.Create} flex ai-center`} onClick={this.toggleSidebar}>
-                                <Icon className='svg'/>
-                                <span>Create A palette</span>
-                            </div>
-                        </div>
-                        <div className="right buttons flex ai-center">
-                            <Button variant="contained" color="secondary" onClick={this.GoBack}>
-                                Go back
-                            </Button>
-                            <Button variant="contained" color="primary" onClick={this.popPaletteForm}>
-                                Save Palette
-                            </Button>
-                        </div>
-                    </div>
+                    <PaletteFormNav 
+                        toggleSidebar={this.toggleSidebar}
+                        GoBack={this.GoBack}
+                        popPaletteForm={this.popPaletteForm}
+                    />
                     <DraggableColorList
                         className={`${classes.content} flex ai-start flex-wrap`}
                         colors={colors}
@@ -181,34 +148,14 @@ class NewPaletteForm extends Component {
                         transitionDuration={400}
                     />
                 </div>
-                <div className={`save-palette-form ${popPaletteFormOpen === true ? 'active' : ''}`}>
-                        <Close className='svg close-icon' onClick={this.popPaletteForm}/>
-                        <ValidatorForm onSubmit={this.handleSavePalette} className='flex flex-column jc-sb ai-start'>
-                            <div className='top'>
-                                <h3 className='title'>Choose A Palette Name</h3>
-                                <p>Please enter a name for your new palette. it needs to be unique!</p>
-                                <TextValidator
-                                    label='Palette Name'
-                                    value ={newPaletteName}
-                                    onChange= {this.handlePaletteNameChange}
-                                    validators={[
-                                        'required',
-                                        'isPaletteNameUnique'
-                                    ]}
-                                    errorMessages={[
-                                        'Enter A Palette Name',
-                                        'Palete Name not unique!'
-                                    ]}
-                                />
-                            </div>
-                            <div className='buttons-wrapper flex ai-center'>
-                                <Button variant="contained" onClick={this.popPaletteForm}>close</Button>
-                                <Button variant="contained" color="primary" style={{backgroundColor: defaultColor}} type='submit'>
-                                    Add Palette
-                                </Button>
-                            </div>
-                        </ValidatorForm>
-                </div>
+                <PopPaletteFrom
+                    popPaletteFormOpen = {popPaletteFormOpen}
+                    popPaletteForm = {this.popPaletteForm}
+                    handleSavePalette = {this.handleSavePalette}
+                    newPaletteName = {newPaletteName}
+                    handlePaletteNameChange = {this.handlePaletteNameChange}
+                    defaultColor={defaultColor}
+                />
             </div>
         )
     }
