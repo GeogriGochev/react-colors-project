@@ -6,6 +6,8 @@ import { generatePalette } from './data/colorHelpers';
 import PaletteList from './components/Sections/PaletteList/PaletteList';
 import SingleColorPalette from './components/Sections/SingleColorPalette/SingleColorPalette';
 import NewPaletteForm from './components/Sections/NewPaletteForm/NewPaletteForm';
+import { withStyles } from '@material-ui/styles';
+import styles from './styles/GlobalStyles';
 
 class App extends Component {
     constructor(props){
@@ -83,5 +85,4 @@ class App extends Component {
     )
   }
 }
-
-export default App;
+export default withStyles(styles)(App);

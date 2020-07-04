@@ -1,6 +1,7 @@
 import React, { Component } from 'react'
 import MiniPalette from '../../MiniPalette/MiniPalette';
 import {Link} from 'react-router-dom';
+import {CSSTransition, TransitionGroup,} from 'react-transition-group';
 import { withStyles } from '@material-ui/styles';
 import background from '../../../assets/images/back-2.jpg';
 import styles from '../../../styles/PaletteListStyles';
@@ -16,13 +17,15 @@ class PaletteList extends Component {
     render() {
         const {palettes, classes, deletePalette} = this.props;
         const miniPalettes = palettes.map( (palette) => (
-            <MiniPalette 
-                {...palette}
-                goToPalette={() => this.goToPalette(palette.id)}
-                deletePalette={deletePalette}
-                key={palette.id}
-                id={palette.id}
-            />
+            <CSSTransition key={palette.id} classNames='fade' timeout={500}>
+                <MiniPalette 
+                    {...palette}
+                    goToPalette={() => this.goToPalette(palette.id)}
+                    deletePalette={deletePalette}
+                    key={palette.id}
+                    id={palette.id}
+                />
+            </CSSTransition>
         ) )
         return (
             <div className={classes.root}>
@@ -35,9 +38,9 @@ class PaletteList extends Component {
                     </div>
                     <div className={` ${classes.main}`}>
                         <div className="container">
-                            <div className='listing  flex ai-center flex-wrap'>
+                            <TransitionGroup className='listing  flex ai-center flex-wrap'>
                                 {miniPalettes}
-                            </div>
+                            </TransitionGroup>
                         </div>
                     </div>               
             </div>

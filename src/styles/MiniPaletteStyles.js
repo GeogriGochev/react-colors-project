@@ -63,5 +63,10 @@ export default {
         transform: ' translateX(10px)',
         opacity: '0',
         transition: '0.25s ease-in-out',
+
+        '@media (max-width: 768px)': {
+            transform: ' translateX(0)',
+            opacity: '1',
+        },
     },
 }

@@ -37,6 +37,17 @@ export default {
                     fill: 'white'
                 }
             }           
+        },
+        '@media (max-width: 768px)': {
+            height: '20%',
+            flex: '0 1 25%',
+            maxWidth: '25%',
+        },
+
+        '@media (max-width: 767px)': {
+            height: '10%',
+            flex: '0 1 100%',
+            maxWidth: '100%',
         }
     }
 }
