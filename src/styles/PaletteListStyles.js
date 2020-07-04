@@ -14,7 +14,7 @@ export default {
         position: 'relative',
         background: 'white',
         zIndex: '1',
-        padding: '22px 30px',
+        padding: '22px 0',
         borderBottom: '1px solid #f4f4f4',
         boxShadow: '-5px 5px 20px rgba(8,42,62,.05)',
         margin: '0 0 30px',
@@ -36,7 +36,9 @@ export default {
     main: {
         position: 'relative',
         zIndex: '1',
-        padding: '0 30px 0',
+        '& .listing': {
+            margin: '0 -15px'
+        }
     }
     
 }

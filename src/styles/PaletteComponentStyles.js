@@ -1,13 +1,16 @@
 export default {
     Palette: {
-        height: 'calc(100vh - 150px)',
+        height: '100vh',
+        overflow: 'hidden'
     },
     PaletteColors: {
         display: 'flex',
         justifyContent: 'flex-start',
         alignItems: 'center',
         flexWrap: ' wrap',
-        height: '100%',
-        fontSize: '20px',
+        height: 'calc(100% - 150px)',
+        '@media (max-width:767px)': {
+            height: 'calc(100% - 100px)',
+        }
     }
 }

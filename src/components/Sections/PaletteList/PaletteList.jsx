@@ -34,8 +34,10 @@ class PaletteList extends Component {
                         </div>
                     </div>
                     <div className={` ${classes.main}`}>
-                        <div className="container flex ai-center jc-sb flex-wrap">
-                            {miniPalettes}
+                        <div className="container">
+                            <div className='listing  flex ai-center flex-wrap'>
+                                {miniPalettes}
+                            </div>
                         </div>
                     </div>               
             </div>

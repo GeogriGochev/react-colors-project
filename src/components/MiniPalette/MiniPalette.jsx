@@ -18,17 +18,19 @@ class MiniPalette extends Component {
         const { classes, paletteName, emoji, colors, goToPalette} = this.props;
         const miniColorBoxes  =  colors.map( color => (<span className={classes.singleColor} key={color.color} style={{background: color.color}}></span>))
         return (
-            <div className={`${classes.minipalette}`}>
-                <div className={`${classes.removeMiniPalette} flex ai-center remove jc-center`} onClick={this.deletePalette}>
-                    <Remove className='svg remove-color'/>
-                </div>
-                <div className='content flex flex-wrap'  onClick = {goToPalette}>
-                    <div className={`flex ai-center flex-wrap ${classes.colors}`}>
-                        {miniColorBoxes}
+            <div className={`${classes.boxMiniPalette}`}>
+                <div className={`${classes.minipalette}`}>
+                    <div className={`${classes.removeMiniPalette} flex ai-center remove jc-center`} onClick={this.deletePalette}>
+                        <Remove className='svg remove-color'/>
                     </div>
-                    <div className={`flex ai-center jc-sb ${classes.bottomPart}`}>
-                        <h3 className={classes.name}>{paletteName}</h3>
-                        <p className={classes.emoji}>{emoji}</p>
+                    <div className='content flex flex-wrap'  onClick = {goToPalette}>
+                        <div className={`flex ai-center flex-wrap ${classes.colors}`}>
+                            {miniColorBoxes}
+                        </div>
+                        <div className={`flex ai-center jc-sb ${classes.bottomPart}`}>
+                            <h3 className={classes.name}>{paletteName}</h3>
+                            <p className={classes.emoji}>{emoji}</p>
+                        </div>
                     </div>
                 </div>
             </div>

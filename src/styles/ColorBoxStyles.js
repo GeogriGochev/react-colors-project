@@ -1,13 +1,17 @@
 export default {
     Palette: {
-        height: 'calc(100vh - 150px)',
+        height: '100vh',
+        overflow:'hidden',
     },
     PaletteColors: {
         display: 'flex',
         justifyContent: 'flex-start',
         alignItems: 'center',
         flexWrap: ' wrap',
-        height: '100%'
+        height: 'calc(100% - 150px)',
+        '@media (max-width: 767px)': {
+            height: 'calc(100% - 107px)',
+        },
     },
     ColorBox: {
         height: '25%',
@@ -20,9 +24,21 @@ export default {
         '&.black': {
             backgroundColor: 'black',
             height: '50%',
+            '@media (max-width: 768px)': {
+                height: '25%',
+            },
+            '@media (max-width: 767px)': {
+                height: '11%',
+            },
         },
         '&.big': {
             height: '50%',
+            '@media (max-width: 768px)': {
+                height: '25%',
+            },
+            '@media (max-width: 767px)': {
+                height: '10%',
+            },
         },
         '&:hover $copyButton': {
             opacity: '1',
@@ -40,6 +56,17 @@ export default {
             right: '0',
             bottom: '0',
             color: 'white'
+        },
+        '@media (max-width: 768px)': {
+            flex: '0 1 33.33%',
+            maxWidth: '33.33%',
+            height: '14.3%',
+        },
+        '@media (max-width: 767px)': {
+            flex: '0 1 100%',
+            maxWidth: '100%',
+            height: '5%',
+            alignIitems:'center'
         }
     },
     copyOverlay: {
@@ -142,12 +169,19 @@ export default {
             bottom: '0',
             color: 'white'
         },
+        '@media (max-width: 767px)': {
+            fontSize: '14px',
+            height: '30px',
+        },
     },
     copyContainer: {
         width: '100%',
         display: 'flex',
         justifyContent: 'flex-start',
         alignItems: 'flex-end',
+        '@media (max-width: 767px)': {
+            alignItems: 'center',
+        }
     },
     boxContent: { 
         display: 'flex',
@@ -160,10 +194,19 @@ export default {
     },
     name: {
         padding: '7px',
+        '@media (max-width: 767px)': {
+            padding: '0 4px',
+        }
     },
     seeMore: {
         background: 'rgba( 255, 255, 255, 0.3 )',
         color: 'white',
         padding: '7px',
+        '@media (max-width: 767px)': {
+            height: '100%',
+            padding: '0 4px',
+            fontSize: '12px',
+            marginRight: '10px'
+        }
     }
 }

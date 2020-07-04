@@ -4,9 +4,16 @@ export default {
         padding: '0 30px',
         '& .container': {
             maxHeight: '75px',
+        },
+        '@media (max-width: 1024px)': {
+            padding: '0',
+        },
+        '@media (max-width:767px)': {
+            height: '50px',
         }
     },
     PalatteInfo: {
+        margin:'0',
         '& span': {
             display: 'inline-block',
             maxHeight: '75px',
