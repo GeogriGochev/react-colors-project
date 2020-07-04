@@ -14,7 +14,16 @@ class PaletteList extends Component {
     }
 
     render() {
-        const {palettes, classes} = this.props;
+        const {palettes, classes, deletePalette} = this.props;
+        const miniPalettes = palettes.map( (palette) => (
+            <MiniPalette 
+                {...palette}
+                goToPalette={() => this.goToPalette(palette.id)}
+                deletePalette={deletePalette}
+                key={palette.id}
+                id={palette.id}
+            />
+        ) )
         return (
             <div className={classes.root}>
                     <img className={classes.background} src={background} alt="background"/>
@@ -26,11 +35,7 @@ class PaletteList extends Component {
                     </div>
                     <div className={` ${classes.main}`}>
                         <div className="container flex ai-center jc-sb flex-wrap">
-                            {
-                                palettes.map( (palette) => (
-                                    <MiniPalette {...palette} key={palette.id} goToPalette={() => this.goToPalette(palette.id)}/>
-                                ) )
-                            }
+                            {miniPalettes}
                         </div>
                     </div>               
             </div>
